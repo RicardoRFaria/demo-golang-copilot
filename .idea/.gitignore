@@ -1,0 +1,23 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+# Zeppelin ignored files
+/ZeppelinRemoteNotebooks/
+/misc.xml
+.idea
+/vcs.xml
+/aws.xml
+/codeStyles/codeStyleConfig.xml
+/compiler.xml
+/encodings.xml
+/GitlabLint.xml
+/gradle.xml
+/jarRepositories.xml
+/kotlinc.xml
+/modules.xml
+/codeStyles/Project.xml
