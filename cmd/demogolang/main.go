@@ -18,9 +18,12 @@ func main() {
 	companyService := services.NewCompanyService(companyRepository)
 
 	userRoutes := web.NewUserRouter(userService)
-	userRoutes.RegisterRoutes(e)
 	companyRoutes := web.NewCompanyRouter(companyService)
+	employeeStateRoutes := web.NewEmployeeStateRouter()
+
+	userRoutes.RegisterRoutes(e)
 	companyRoutes.RegisterRoutes(e)
+	employeeStateRoutes.RegisterRoutes(e)
 
 	err := e.Start(":8080")
 	if err != nil {
