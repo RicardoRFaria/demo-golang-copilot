@@ -28,7 +28,8 @@ func (r *Router) getUser(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}
 
-	user, err := r.userService.GetUser(id)
+	context := c.Request().Context()
+	user, err := r.userService.GetUser(context, id)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
@@ -37,12 +38,13 @@ func (r *Router) getUser(c echo.Context) error {
 }
 
 func (r *Router) saveUser(c echo.Context) error {
+	context := c.Request().Context()
 	var user model.User
 	if err := c.Bind(&user); err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}
 
-	err := r.userService.SaveUser(user)
+	err := r.userService.SaveUser(context, user)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
@@ -51,7 +53,8 @@ func (r *Router) saveUser(c echo.Context) error {
 }
 
 func (r *Router) listUsers(c echo.Context) error {
-	users, err := r.userService.ListUsers()
+	context := c.Request().Context()
+	users, err := r.userService.ListUsers(context)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}

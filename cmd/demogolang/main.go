@@ -12,10 +12,15 @@ func main() {
 	e := echo.New()
 
 	userRepository := repository.NewUserRepository()
-	userService := services.NewUserService(userRepository)
+	companyRepository := repository.NewCompanyRepository()
 
-	router := web.NewUserRouter(userService)
-	router.RegisterRoutes(e)
+	userService := services.NewUserService(userRepository)
+	companyService := services.NewCompanyService(companyRepository)
+
+	userRoutes := web.NewUserRouter(userService)
+	userRoutes.RegisterRoutes(e)
+	companyRoutes := web.NewCompanyRouter(companyService)
+	companyRoutes.RegisterRoutes(e)
 
 	err := e.Start(":8080")
 	if err != nil {
