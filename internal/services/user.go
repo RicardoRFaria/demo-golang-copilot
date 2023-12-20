@@ -55,7 +55,7 @@ func (u *userService) ListUsers(ctx context.Context) ([]model.User, error) {
 
 	filteredUsers := make([]model.User, 0)
 	for _, user := range users {
-		if strings.EqualFold(user.LastName, "Faria") {
+		if strings.EqualFold(user.LastName, "faria") {
 			filteredUsers = append(filteredUsers, user)
 		}
 	}
@@ -69,16 +69,16 @@ func (u *userService) ListUserLastNames(ctx context.Context) ([]string, error) {
 		return nil, fmt.Errorf("error listing users: %w", err)
 	}
 
-	userNames := make([]string, 0)
+	lastNames := make([]string, 0)
 	for _, user := range users {
-		userNames = append(userNames, user.LastName)
+		lastNames = append(lastNames, user.LastName)
 	}
 	// first option
-	userNames = removeDuplicates(userNames)
+	lastNames = removeDuplicates(lastNames)
 	// second option
-	userNames = removeDuplicatesUsingMap(userNames)
+	lastNames = removeDuplicatesUsingMap(lastNames)
 
-	return userNames, nil
+	return lastNames, nil
 }
 
 func removeDuplicates(elements []string) []string {
@@ -98,10 +98,10 @@ func removeDuplicates(elements []string) []string {
 }
 
 func removeDuplicatesUsingMap(elements []string) []string {
-	uniqueStrings := map[string]bool{}
+	uniqueStrings := map[string]interface{}{}
 
 	for v := range elements {
-		uniqueStrings[elements[v]] = true
+		uniqueStrings[elements[v]] = nil
 	}
 
 	keys := make([]string, 0, len(uniqueStrings))
